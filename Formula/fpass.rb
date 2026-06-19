@@ -6,7 +6,6 @@ class Fpass < Formula
   license "MIT"
 
   depends_on "rust" => :build
-  depends_on cask: "keepassxc"
 
   def install
     system "cargo", "build", "--release", "--locked"
@@ -14,7 +13,15 @@ class Fpass < Formula
     doc.install "README.md"
   end
 
-  def test
-    system "#{bin}/fpass", "--version" rescue nil
+  def caveats
+    <<~EOS
+      fpass requer o KeePassXC instalado para funcionar.
+      Caso ainda não tenha, instale com:
+        brew install --cask keepassxc
+    EOS
+  end
+
+  test do
+    system "#{bin}/fpass", "--version"
   end
 end
