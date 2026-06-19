@@ -6,7 +6,7 @@ class Fpass < Formula
   license "MIT"
 
   depends_on "rust" => :build
-  depends_on "keepassxc"
+  depends_on cask: "keepassxc"
 
   def install
     system "cargo", "build", "--release", "--locked"
